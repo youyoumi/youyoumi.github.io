@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>TCP详解 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="TCP详解基本特性：​    三次握手四次挥手 三次握手的目的： 第一次：客户端 –&gt; 服务器（为了让服务器知道客户端要连接了）  第二次：客户端 &lt;– 服务器 （让客户端知道服务器接受到了请求）  第三次：客户端 –&gt;服务器（服务器知道客户端收到了自己的回应）   三次握手流程详解 刚开始的时候，服务器和客户端都处于CLOSE的状态 服务器进程先创建传输控制块TCB，TCB创建">
+  <meta name="description" content="我的TCP详解基本特性：​    三次握手四次挥手 三次握手的目的： 第一次：客户端 –&gt; 服务器（为了让服务器知道客户端要连接了）  第二次：客户端 &lt;– 服务器 （让客户端知道服务器接受到了请求）  第三次：客户端 –&gt;服务器（服务器知道客户端收到了自己的回应）   三次握手流程详解 刚开始的时候，服务器和客户端都处于CLOSE的状态 服务器进程先创建传输控制块TCB，TCB">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TCP详解">
 <meta property="og:url" content="http://yoursite.com/2020/04/09/TCP%E8%AF%A6%E8%A7%A3/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="TCP详解基本特性：​    三次握手四次挥手 三次握手的目的： 第一次：客户端 –&gt; 服务器（为了让服务器知道客户端要连接了）  第二次：客户端 &lt;– 服务器 （让客户端知道服务器接受到了请求）  第三次：客户端 –&gt;服务器（服务器知道客户端收到了自己的回应）   三次握手流程详解 刚开始的时候，服务器和客户端都处于CLOSE的状态 服务器进程先创建传输控制块TCB，TCB创建">
+<meta property="og:description" content="我的TCP详解基本特性：​    三次握手四次挥手 三次握手的目的： 第一次：客户端 –&gt; 服务器（为了让服务器知道客户端要连接了）  第二次：客户端 &lt;– 服务器 （让客户端知道服务器接受到了请求）  第三次：客户端 –&gt;服务器（服务器知道客户端收到了自己的回应）   三次握手流程详解 刚开始的时候，服务器和客户端都处于CLOSE的状态 服务器进程先创建传输控制块TCB，TCB">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-04-09T00:03:15.662Z">
-<meta property="article:modified_time" content="2020-04-02T13:20:53.284Z">
+<meta property="article:modified_time" content="2020-04-09T02:24:44.554Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -174,7 +174,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="TCP详解"><a href="#TCP详解" class="headerlink" title="TCP详解"></a>TCP详解</h1><h3 id="基本特性："><a href="#基本特性：" class="headerlink" title="基本特性："></a>基本特性：</h3><p>​    三次握手四次挥手</p>
+        <h1 id="我的TCP详解"><a href="#我的TCP详解" class="headerlink" title="我的TCP详解"></a>我的TCP详解</h1><h3 id="基本特性："><a href="#基本特性：" class="headerlink" title="基本特性："></a>基本特性：</h3><p>​    三次握手四次挥手</p>
 <h3 id="三次握手的目的："><a href="#三次握手的目的：" class="headerlink" title="三次握手的目的："></a>三次握手的目的：</h3><ol>
 <li><p>第一次：客户端 –&gt; 服务器（为了让服务器知道客户端要连接了）</p>
 </li>

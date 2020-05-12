@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>队列的结构和原理 | 陈登万的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="队列的基本介绍 队列是有序列表,是线性结构 当使用数组的结构来存储队列的数据时，队列是一种操作受限的顺序表 队列的特点是先进先出  使用数组创建队列1.队头front -">
+  <meta name="description" content="队列的基本介绍 队列是有序列表,是线性结构 当使用数组的结构来存储队列的数据时，队列是一种操作受限的顺序表 队列的特点是先进先出">
 <meta property="og:type" content="article">
 <meta property="og:title" content="队列的结构和原理">
 <meta property="og:url" content="http://yoursite.com/2020/04/09/%E9%98%9F%E5%88%97%E7%9A%84%E7%BB%93%E6%9E%84%E5%92%8C%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="陈登万的个人博客">
-<meta property="og:description" content="队列的基本介绍 队列是有序列表,是线性结构 当使用数组的结构来存储队列的数据时，队列是一种操作受限的顺序表 队列的特点是先进先出  使用数组创建队列1.队头front -">
+<meta property="og:description" content="队列的基本介绍 队列是有序列表,是线性结构 当使用数组的结构来存储队列的数据时，队列是一种操作受限的顺序表 队列的特点是先进先出">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-04-09T13:56:18.000Z">
-<meta property="article:modified_time" content="2020-04-10T05:00:16.092Z">
+<meta property="article:modified_time" content="2020-04-11T11:46:25.313Z">
 <meta property="article:author" content="陈登万">
 <meta property="article:tag" content="数据结构">
 <meta property="article:tag" content="队列">
@@ -181,8 +181,10 @@
 <li>当使用数组的结构来存储队列的数据时，队列是一种操作受限的顺序表</li>
 <li>队列的特点是先进先出</li>
 </ol>
-<h3 id="使用数组创建队列"><a href="#使用数组创建队列" class="headerlink" title="使用数组创建队列"></a>使用数组创建队列</h3><p>1.队头front</p>
-<p>- </p>
+<a id="more"></a>
+
+<h3 id="使用数组创建队列"><a href="#使用数组创建队列" class="headerlink" title="使用数组创建队列"></a>使用数组创建队列</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line">package DataStructrue;</span><br><span class="line"></span><br><span class="line">import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;</span><br><span class="line"></span><br><span class="line">import java.util.Scanner;</span><br><span class="line"></span><br><span class="line">public class ArrayQueueDemo &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        &#x2F;&#x2F;测试</span><br><span class="line">        &#x2F;&#x2F;创建一个新的队列</span><br><span class="line">        ArrayQueue queue &#x3D; new ArrayQueue(3);</span><br><span class="line">        Scanner  scanner &#x3D; new Scanner(System.in);</span><br><span class="line">        boolean loop &#x3D; true;</span><br><span class="line">        System.out.println(&quot;输出一个菜单&quot;);</span><br><span class="line">        while (loop)&#123;</span><br><span class="line">            System.out.println(&quot;s:显示队列&quot;);</span><br><span class="line">            System.out.println(&quot;e:退出程序&quot;);</span><br><span class="line">            System.out.println(&quot;a:添加数据到队列&quot;);</span><br><span class="line">            System.out.println(&quot;g:从队列取出数据&quot;);</span><br><span class="line">            System.out.println(&quot;h:查看队列头数据&quot;);</span><br><span class="line">            int key &#x3D; scanner.next().charAt(0);</span><br><span class="line">            switch (key)&#123;</span><br><span class="line">                case &#39;s&#39;:</span><br><span class="line">                    queue.showQueue();</span><br><span class="line">                    break;</span><br><span class="line">                case &#39;a&#39;:</span><br><span class="line">                    System.out.println(&quot;添加一个数据&quot;);</span><br><span class="line">                    int value &#x3D; scanner.nextInt();</span><br><span class="line">                    queue.addQueue(value);</span><br><span class="line">                    break;</span><br><span class="line">                case &#39;g&#39;:</span><br><span class="line">                    try &#123;</span><br><span class="line">                        int res &#x3D; queue.getQueue();</span><br><span class="line">                        System.out.println(&quot;取出的数据是：&quot;+res);</span><br><span class="line">                    &#125;catch (Exception e)&#123;</span><br><span class="line">                        System.out.println(e.getMessage());</span><br><span class="line">                    &#125;</span><br><span class="line">                    break;</span><br><span class="line">                case &#39;h&#39;:</span><br><span class="line">                    try&#123;</span><br><span class="line">                        int res &#x3D; queue.showQueueHead();</span><br><span class="line">                        System.out.println(&quot;队列头部数据时:&quot;+res);</span><br><span class="line">                    &#125;catch (Exception e)&#123;</span><br><span class="line">                        System.out.println(e.getMessage());</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    break;</span><br><span class="line">                case &#39;e&#39;:&#x2F;&#x2F;退出</span><br><span class="line">                    scanner.close();</span><br><span class="line">                    loop &#x3D; false;</span><br><span class="line">                    break;</span><br><span class="line">                default:</span><br><span class="line">                    break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;程序已退出&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;定义队列类</span><br><span class="line">    static class ArrayQueue&#123;</span><br><span class="line">        private int maxSize;&#x2F;&#x2F;队列的最大容量</span><br><span class="line">        private int front;&#x2F;&#x2F;队列头</span><br><span class="line">        private int rear;&#x2F;&#x2F;队列尾</span><br><span class="line">        private int[] arr;&#x2F;&#x2F;该数组用于存储数据，模拟队列</span><br><span class="line"></span><br><span class="line">        public ArrayQueue(int arrmaxSize)&#123;</span><br><span class="line">            maxSize &#x3D; arrmaxSize;</span><br><span class="line">            arr &#x3D; new int[maxSize];&#x2F;&#x2F;创建数组</span><br><span class="line">            front &#x3D; -1;&#x2F;&#x2F;指向队列头部，用于确定下一次删除的数据的位置</span><br><span class="line">            rear &#x3D; -1;&#x2F;&#x2F;指向队列尾,用户确定下一个添加的数据存储的位置</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;判断队列是否满</span><br><span class="line">        public boolean isFull()&#123;</span><br><span class="line">            return rear &#x3D;&#x3D; maxSize-1;</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;判断队列是否为空</span><br><span class="line">        public boolean isEmpty()&#123;</span><br><span class="line">            return rear &#x3D;&#x3D; front;</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;添加数据到队列</span><br><span class="line">        public void addQueue (int n)&#123;</span><br><span class="line">            if(isFull())&#123;</span><br><span class="line">                System.out.println(&quot;队列满&quot;);</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">            rear++;</span><br><span class="line">            arr[rear]&#x3D;n;</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;获取数据的队列</span><br><span class="line">        public int getQueue()&#123;</span><br><span class="line">            if(isEmpty())&#123;</span><br><span class="line">                &#x2F;&#x2F;通过跑出异常</span><br><span class="line">                throw new RuntimeException(&quot;队列空&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            front++;&#x2F;&#x2F;front后移</span><br><span class="line">            return arr[front];</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;显示队列所有的数据</span><br><span class="line">        public void  showQueue()&#123;</span><br><span class="line">            if (isEmpty())&#123;</span><br><span class="line">                System.out.println(&quot;队列为空无法打印数据&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            for (int i &#x3D; 0; i &lt;arr.length ; i++) &#123;</span><br><span class="line">                System.out.println(arr[i]+&quot;  &quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;显示队列的头数据，并不是取出数据</span><br><span class="line">        public int showQueueHead()&#123;</span><br><span class="line">            if (isEmpty())&#123;</span><br><span class="line">                throw new RuntimeException(&quot;队列空，没有头数据&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            return arr[front+1];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
 
@@ -428,11 +430,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">java面试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">TCP</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">剑指offer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Java虚拟机， 学习思考记录</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -444,11 +466,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color2">深入理解java虚拟机</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">稀疏数组</a>
+                <a href="javascript:void(0)" class="js-tag color2">自动内存管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Java内存区域和内存溢出</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -456,7 +486,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">稀疏数组</a>
               </li>
             
             <div class="clearfix"></div>

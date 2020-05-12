@@ -152,6 +152,935 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="n-剑指offer刷题记录" class="article article-type-n  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/08/%E5%89%91%E6%8C%87offer%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">剑指offer刷题记录</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/08/%E5%89%91%E6%8C%87offer%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="archive-article-date">
+  	<time datetime="2020-05-07T23:24:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="剑指offer刷题记录"><a href="#剑指offer刷题记录" class="headerlink" title="剑指offer刷题记录"></a>剑指offer刷题记录</h2><ol start="3">
+<li><h5 id="数组中的重复的数字"><a href="#数组中的重复的数字" class="headerlink" title="数组中的重复的数字"></a><strong>数组中的重复的数字</strong></h5><ul>
+<li><pre><code>class Solution {
+    public int findRepeatNumber(int[] nums) {
+        int temp;//用于交换
+        for(int i=0;i&lt;nums.length;i++){//每次循环是为了让nums[i]=i
+            while(nums[i]!=i){//不存在无限循环，因为如果无法实现nums[i]=i的时候就一定会触发if内的条件,直接返回结果
+                if(nums[i]==nums[nums[i]]){
+                    return nums[i];
+                }else{
+                    //交换nums[i]和nums[nums[i]]
+                    temp = nums[i];
+                    nums[i] = nums[temp];
+                    nums[temp] = temp;
+                }
+            }
+        }
+        return -1;//如果排序完没有重复，则直接返回-1
+    }
+}
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">   - 思路：对数组进行排序，使得每个数组索引对应的数值等于索引值即nums[i]&#x3D;i，查询过程中判断是否出现nums[i]&#x3D;nums[nums[i]]的情况，出现意味着出现重复的数值，直接返回当前索引对应的数值。</span><br><span class="line"></span><br><span class="line">   - 时间复杂度，最优情况O(1)，最差情况为O(n)</span><br><span class="line"></span><br><span class="line">4. ##### 二维数组中的查找</span><br><span class="line"></span><br><span class="line">   - &#96;&#96;&#96;java</span><br><span class="line">     class Solution &#123;</span><br><span class="line">         public boolean findNumberIn2DArray(int[][] matrix, int target) &#123;</span><br><span class="line">             if(matrix.length&#x3D;&#x3D;0)&#123;</span><br><span class="line">                 return false;</span><br><span class="line">             &#125;</span><br><span class="line">             int r &#x3D; 0;</span><br><span class="line">             int c &#x3D; matrix[0].length-1;</span><br><span class="line">             while(r&lt;matrix.length &amp;&amp; c&gt;&#x3D;0)&#123;</span><br><span class="line">                 if(matrix[r][c]&#x3D;&#x3D;target)&#123;</span><br><span class="line">                     return true;</span><br><span class="line">                 &#125;else if(matrix[r][c]&gt;target)&#123;</span><br><span class="line">                     c--;</span><br><span class="line">                 &#125;else&#123;</span><br><span class="line">                     r++;</span><br><span class="line">                 &#125;</span><br><span class="line">             &#125;</span><br><span class="line">             return false;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure></code></pre></li>
+<li><p>思路：从矩阵的右上角开始遍历，如果当前索引对应的数值大于target则更接近target的数值在左侧，如果索引对应的数值小于target，说明target在数值更大的位置也就是在下面。</p>
+</li>
+<li><p>时间复杂度为O(n)，空间复杂度为O(1)</p>
+</li>
+</ul>
+</li>
+<li><h6 id="替换空格"><a href="#替换空格" class="headerlink" title="替换空格"></a>替换空格</h6><ul>
+<li><pre><code class="java"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{
+    <span class="function"><span class="keyword">public</span> String <span class="title">replaceSpace</span><span class="params">(String s)</span> </span>{
+        <span class="keyword">if</span>(s==<span class="keyword">null</span>){
+            <span class="keyword">return</span> <span class="keyword">null</span>;
+        }
+        StringBuilder sb = <span class="keyword">new</span> StringBuilder();
+        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;s.length();i++){
+            <span class="keyword">if</span>(String.valueOf(s.charAt(i)).equals(<span class="string">" "</span>)){
+                sb.append(<span class="string">"%20"</span>);
+            }<span class="keyword">else</span>{
+                sb.append(s.charAt(i));
+            }
+        }
+        <span class="keyword">return</span> String.valueOf(sb);
+    }
+}
+&lt;!--￼<span class="number">1</span>--&gt;</code></pre>
+</li>
+<li><p>思路：使用Stack数据结构先进后出的特点来存储链表节点。创建一个temp来保存头节点的信息，然后遍历链表，只要链表不为空（表示当前节点不是链表尾部），则将当前节点使用push存入栈中，然后移动当前temp的节点到下一个节点。遍历结束之后，获取栈的深度，遍历栈，使用pop方法移除栈最后进去的节点信息，将该节点的数值存入数组。</p>
+</li>
+<li><p>时间复杂度O(n)，空间复杂度为O(n)</p>
+</li>
+</ul>
+</li>
+<li></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">剑指offer</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/08/%E5%89%91%E6%8C%87offer%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-基本排序算法和代码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/29/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%92%8C%E4%BB%A3%E7%A0%81/">基本排序算法和代码</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/29/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%92%8C%E4%BB%A3%E7%A0%81/" class="archive-article-date">
+  	<time datetime="2020-04-29T01:41:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h5><ul>
+<li><p>可以提前退出，是稳定的排序    </p>
+</li>
+<li><p>时间复杂度分析</p>
+<ul>
+<li>优化后的代码的时候复杂度平均情况是O(n<sup>2</sup>)，最好的情况是O(n)</li>
+</ul>
+</li>
+<li><p>空间复杂度</p>
+<ul>
+<li>空间复杂度为O(1)</li>
+</ul>
+</li>
+<li><p>代码如下：</p>
+<ul>
+<li><pre><code>    //冒泡排序(升序)
+    public  static int[] sortingOfBubble(int[] array){
+        int temp = 0;//临时变量
+        boolean flag = false;//用于判断本次遍历交换后数组是否发生改变，若无则提前退出
+        for (int i = 0; i &lt; array.length-1; i++) {
+            for (int j = 0; j &lt; array.length-1-i ; j++) {
+                if (array[j] &gt; array[j+1]){
+                    temp = array[j+1];
+                    array[j+1] = array[j];
+                    array[j] = temp;
+                    flag = true;
+                }
+            }
+            if(!flag){//flag为假的时候意味着数组没有发生改变，可以提前退出
+                break;
+            }else{
+                flag=false;
+                System.out.println(&quot;第&quot;+(i+1)+&quot;次执行&quot;);
+            }
+        }
+        return array;
+    }
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 总结</span><br><span class="line"></span><br><span class="line">  - 冒泡排序是从下标小的位置开始向下标大的位置遍历，以升序为例，如果说当前元素大于后一位的元素，则交换两个元素的位置。每一次就换结束就会确定一个最大值，后续的遍历比较的次数就可以少一次，一共需要遍历n-1次。冒泡排序是稳定的排序，并且可以提前退出。</span><br><span class="line"></span><br><span class="line">##### 选择排序</span><br><span class="line"></span><br><span class="line">- 直接选择排序是不稳定的</span><br><span class="line"></span><br><span class="line">- 时间复杂度分析</span><br><span class="line"></span><br><span class="line">  - 算法的时间复杂度情况是O(n&lt;sup&gt;2&lt;&#x2F;sup&gt;)</span><br><span class="line"></span><br><span class="line">- 空间复杂度为O(1)</span><br><span class="line"></span><br><span class="line">- 代码如下：（未优化）</span><br><span class="line"></span><br><span class="line">  -</span><br></pre></td></tr></table></figure>
+//选择排序（升序）
+public static int[] sortingOfSelect(int[] array){
+    int temp;
+    for (int i = 0; i &lt;array.length-1 ; i++) {
+        for (int j = i; j &lt;array.length-1 ; j++) {
+            if (array[i] &gt; array[j+1]){
+                temp = array[i];
+                array[i] = array[j+1];
+                array[j+1] = temp;
+            }
+        }
+    }
+    return array;
+}
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 优化的代码如下：（优化）</span><br><span class="line"></span><br><span class="line">  -</span><br></pre></td></tr></table></figure>
+//选择排序（升序）(优化1：将每次比较交换数据改为记录索引值)
+public static int[] sortingOfSelect1(int[] array){
+    int min=0;//记录当前遍历中的最小值的索引值
+    int temp;//用于交换
+    for (int i = 0; i &lt;array.length-1 ; i++) {
+        min=i;
+        for (int j = i+1; j &lt;array.length-1 ; j++) {
+                if(array[j] &lt; array[min]){
+                    min=j;
+                }
+            }
+       if(i!=min){
+           temp = array[min];
+           array[min] = array[i];
+           array[i] = temp;
+       }
+    }
+    return array;
+}
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 总结</span><br><span class="line"></span><br><span class="line">  - 优化后的选择排序以升序为例，每趟比较的过程中，找到本趟比较的最小值，存于本趟比较的第一个位置。</span><br><span class="line"></span><br><span class="line">##### 插入排序</span><br><span class="line"></span><br><span class="line">- 插入排序是稳定的排序</span><br><span class="line"></span><br><span class="line">- 时间复杂度分析</span><br><span class="line"></span><br><span class="line">  - 初始序列为正的时候，只需要比较n-1次和移动0次所以是O(n);</span><br><span class="line">  - 当初始序列为反序的时候O(n)</span><br><span class="line"></span><br><span class="line">- 代码如下：</span><br><span class="line"></span><br><span class="line">  -</span><br></pre></td></tr></table></figure>
+//插入排序（升序）
+public static int[] sortingOfInsert(int[] array){
+    int temp;
+    for (int i = 1; i &lt;array.length ; i++) {
+        temp = array[i];//记录要插入的数据
+        int j;
+        for (j = i; j&gt;0 &amp;&amp; array[j-1]&gt;temp; j--) {
+           array[j] = array[j-1];
+        }
+        if(i!=j){
+            array[j]=temp;
+        }
+    }
+    return array;
+}</code></pre></li>
+</ul>
+</li>
+<li><p>总结</p>
+<ul>
+<li>将数组分为有序和无序两列，从无序拿出第一个元素在插入到有序的数组中。插入排序是稳定的排序。插入排序对于已经排好序的数据操作时，数据较高。但是插入排序一般来说效率很低，因为插入排序每次智能机两数据移动一位。</li>
+</ul>
+</li>
+</ul>
+<h5 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h5>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">排序</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/29/%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%92%8C%E4%BB%A3%E7%A0%81/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java并发编程实践-学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/18/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E8%B7%B5-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Java并发编程实践-学习笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/18/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E8%B7%B5-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2020-04-18T13:17:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="什么是进程？"><a href="#什么是进程？" class="headerlink" title="什么是进程？"></a>什么是进程？</h4><ul>
+<li>进程由指令和数据组成的，指令要运行，数据要读写，就必须要将指令加载到CPU，数据加载到内存。进程就是用来加载指令，管理内存，管理io的</li>
+<li>将程序的代码加载至内存就开启了一个进程</li>
+</ul>
+<h4 id="什么是线程？"><a href="#什么是线程？" class="headerlink" title="什么是线程？"></a>什么是线程？</h4><ul>
+<li>一个进程可以分为多个线程</li>
+<li>一个线程就是一个指令流，将指令流中的一条条指令按照一定的顺序交给CPU执行</li>
+<li>在Java中，线程是最小的调度单位，进程是最小的资源分配单位，进程在windows中使不活动的，只是作为线程的容器</li>
+<li>线程是由多个指令组成的指令流，由任务调度器执行</li>
+</ul>
+<h4 id="二者的对比"><a href="#二者的对比" class="headerlink" title="二者的对比"></a>二者的对比</h4><ul>
+<li>进程拥有共享的资源，如内存空间可以共享给内部的线程</li>
+<li>进程通信依靠协议，同一台使用IPC，不同的使用协议</li>
+<li>多个线程可以访问一个共享变量</li>
+</ul>
+<h4 id="并发与并行（concurrent-and-parallel）"><a href="#并发与并行（concurrent-and-parallel）" class="headerlink" title="并发与并行（concurrent and parallel）"></a>并发与并行（concurrent and parallel）</h4><ul>
+<li>并发是同一时间应对多件事情的能力（产生资源竞争）</li>
+<li>并行是同一时间内动手做多件事情的能力</li>
+</ul>
+<h4 id="异步与同步"><a href="#异步与同步" class="headerlink" title="异步与同步"></a>异步与同步</h4><ul>
+<li>需要等待结果返回的就是同步</li>
+<li>不需要等待结果返回的就是异步</li>
+</ul>
+<h4 id="创建线程的三种方式及其特点"><a href="#创建线程的三种方式及其特点" class="headerlink" title="创建线程的三种方式及其特点"></a>创建线程的三种方式及其特点</h4><ul>
+<li><p>Thread创建线程对象</p>
+<ul>
+<li><pre><code>public class ThreadCreateByThread {
+    public static void main(String[] args) {
+        //直接使用Thread创建线程
+        Thread t= new Thread(){
+            public void run(){
+                System.out.println(&quot;线程启动&quot;);
+            }
+        };
+        t.start();
+    }
+}
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 使用Runnable配合Thread</span><br><span class="line"></span><br><span class="line">  -</span><br></pre></td></tr></table></figure>
+Runnable r = new Runnable(){
+    public void run(){
+        System.out.println(&quot;Runnable&quot;);
+    }
+};
+Thread t = new Thread(r);
+t.start();
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- FutureTask配合calllable对象</span><br><span class="line"></span><br><span class="line">#### Thread常见的方法</span><br><span class="line"></span><br><span class="line">- getName：获取线程的名称</span><br><span class="line">- toString：获取线程的名称，优先级，线程组按照字符串表示</span><br><span class="line">- currentThread：返回当前线程的对象实例，Thread.currentThread和某个实例比如 t.currentThread不返回对象实例的信息，而是返回当前正在执行的线程的实例。</span><br><span class="line">- sleep</span><br><span class="line">  1. 调用sleep会让当前线程的状态从Running进入Timed_Waiting</span><br><span class="line">  2. 其他线程可以使用interrupt方法打断正在睡眠的线程，这个时候线程会抛出interruptException</span><br><span class="line">  3. 睡眠结束后的线程需要重新等待cpu分配时间片，不然会立刻执行</span><br><span class="line">- yield</span><br><span class="line">  1. 调用yield会让当前线程从Running进入Runnable状态，然后调度执行其他线程</span><br><span class="line">  2. 具体的实现依赖于操作系统的任务调度器</span><br><span class="line">- interrupt</span><br><span class="line">  1. 打断处于执行完sleep，wait，join方法的线程会重置为false即 isInterrupt方法返回false</span><br><span class="line">  2. 打断正常状态下的线程会使线程重置为true</span><br><span class="line">- stop</span><br><span class="line">  1. stop会用真正杀死线程，如果这个时候线程锁住了共享资源，那么当它被杀死的时候就没有机会释放锁，其他线程将永远无法获取锁</span><br><span class="line">  2. 使用两阶段终止模式来结束线程</span><br><span class="line"></span><br><span class="line">##### 守护线程</span><br><span class="line"></span><br><span class="line">- 当所有的非守护线程都结束后，所有的守护线程自动结束</span><br><span class="line"></span><br><span class="line">##### Java线程的六种状态</span><br><span class="line"></span><br><span class="line">- NEW</span><br><span class="line">  - 线程刚被创建，还没有调用start方法</span><br><span class="line">- RUNNABLE</span><br><span class="line">  - 执行start方法，但是CPU不一定分配了时间片</span><br><span class="line">- TERMINATED</span><br><span class="line">  - 线程执行结束</span><br><span class="line">- TIMED_WAITING</span><br><span class="line">  - </span><br><span class="line">- WAITING</span><br><span class="line">- BLOCKED</span><br><span class="line"></span><br><span class="line">##### 解决线程安全问题（避免临界区的竞态条件发生）的方法</span><br><span class="line"></span><br><span class="line">- 阻塞式的解决方案：synchronized,Lock</span><br><span class="line">- 非阻塞的解决方案：原子变量</span><br><span class="line"></span><br><span class="line">##### synchronized</span><br><span class="line"></span><br><span class="line">- 锁写在方法上就是锁住了当前对象</span><br><span class="line"></span><br><span class="line">  -</span><br></pre></td></tr></table></figure>
+public void decrement(){
+    synchronized (this){
+        counter--;
+    }
+}
+public synchronized int getCounter(){
+        return counter;
+}
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 锁在静态方法就是锁住了类对象</span><br><span class="line"></span><br><span class="line">  -</span><br></pre></td></tr></table></figure>
+public void increment(){
+    synchronized (MyLock.class){
+        counter++;
+    }
+}
+public static void decrement(){
+        counter--;
+}</code></pre></li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/18/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E8%B7%B5-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java面试题-答案" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/16/Java%E9%9D%A2%E8%AF%95%E9%A2%98-%E7%AD%94%E6%A1%88/">Java面试题-答案</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/16/Java%E9%9D%A2%E8%AF%95%E9%A2%98-%E7%AD%94%E6%A1%88/" class="archive-article-date">
+  	<time datetime="2020-04-16T08:52:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/16/Java%E9%9D%A2%E8%AF%95%E9%A2%98-%E7%AD%94%E6%A1%88/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java面试题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/16/Java%E9%9D%A2%E8%AF%95%E9%A2%98/">Java面试题</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/16/Java%E9%9D%A2%E8%AF%95%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2020-04-16T08:38:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>Java中的四种引用类型</li>
+<li></li>
+<li>1</li>
+<li>1</li>
+<li>1</li>
+<li>1</li>
+<li>1</li>
+<li></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">java面试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/16/Java%E9%9D%A2%E8%AF%95%E9%A2%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java虚拟机-学习思考记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/12/Java%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AD%A6%E4%B9%A0%E6%80%9D%E8%80%83%E8%AE%B0%E5%BD%95/">Java虚拟机-学习思考记录</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/12/Java%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AD%A6%E4%B9%A0%E6%80%9D%E8%80%83%E8%AE%B0%E5%BD%95/" class="archive-article-date">
+  	<time datetime="2020-04-12T12:33:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="自动内存管理"><a href="#自动内存管理" class="headerlink" title="自动内存管理"></a>自动内存管理</h3><ol>
+<li><strong>为什么需要学习Java虚拟机</strong><ul>
+<li>Java和c++不用，内存管理机制是交由Java虚拟机来管理的，而c++是需要开发者自己编写需要的内存创建和销毁的相关函数，需要维护对象的生命周期负责。由于Java虚拟机完成了内存管理的工作，一旦发生内存泄露和内存溢出，如果不理解Java虚拟机的内存的机制，开发者排查错误和修正问题会很艰难。</li>
+</ul>
+</li>
+<li><strong>java虚拟机运行时的数据分区是什么样的？哪些是线程共享的，哪些是线程私有的？</strong><ul>
+<li>java运行时的数据区域可以分为5大区域，方法区（Method Area），堆（Heap），虚拟机栈（Virtual Machine Stack），本地方法栈（Native Method Stack），程序计数器（Program Counter Register）</li>
+<li>其中方法区和堆是线程共享，本地方法栈和程序计数器，虚拟机栈是线程私有</li>
+</ul>
+</li>
+<li><strong>程序计数器的是什么？它的作用是什么</strong><ul>
+<li>程序计数器就是一块较小的内存空间，可以被看做一个当前线程所执行的字节码的行号指示器</li>
+<li>字节码解释器可以通过改变当前程序计数器的数值来选取下一条需要执行的字节码命令，被看做程序控制流的指示器</li>
+<li>依赖于这个计数器，就可以实现程序的分支，循环，跳转，异常处理，线程恢复等功能。</li>
+<li>如果一个线程正在执行一个java方法，此时程序计数器内存储的当前线程正在执行的虚拟机字节码指令的地址，但是如果执行的是一个本地方法，此时的程序计数器为空（Undefined），程序计数器是《Java虚拟机规范》里面唯一没规定任何OutOfMemoryError(内存溢出)情况的区域</li>
+</ul>
+</li>
+<li><strong>为什么程序计数器是线程私有的内存空间？</strong><ul>
+<li>这要从Java虚拟机的多线程的实现方式讲起，Java虚拟机多线程的实现方式是线程轮流切换，分配处理器的执行时间。对于任何一个确定的时刻而言，一个处理器（多核的话就是一个内核）都只会执行一条线程中的指令，所以为了保证每一个线程切换后可以恢复到正确的执行的位置，每一个线程都要有一个单独的程序计数器，并且要求保证不同的线程之间的程序计数器互不影响，独立存储。我们就把这一类的内存区域称为“线程私有”的内存</li>
+</ul>
+</li>
+<li><strong>Java虚拟机栈有什么特点？</strong><ul>
+<li>Java虚拟机栈，本地方法栈和程序计数器都是线程私有的</li>
+</ul>
+</li>
+<li><strong>Java虚拟机栈执行Java方法时候的内存模型?</strong><ul>
+<li>当一个Java方法被执行的时候，Java虚拟机都会同步创建一个栈帧，栈帧内部存储局部变量表，操作数栈，动态链接，方法出口等信息。每一个方法的调用到执行结束都意味着一个栈帧在虚拟机栈中的入栈到出栈的过程。</li>
+</ul>
+</li>
+<li><strong>Java虚拟机栈中的异常有哪些，异常产生的原因？</strong><ul>
+<li>栈溢出（StackOverflowError）：当线程请求的栈深度大于虚拟机所允许的栈深度</li>
+<li>内存溢出（OutOfMemoryError）:如果Java虚拟允许栈容量可以动态扩展，当栈扩展的时候无法申请到足够的内存的时候就会抛出内存溢出的异常</li>
+</ul>
+</li>
+<li><strong>栈帧的内存模型</strong><ul>
+<li>局部变量表</li>
+<li>操作数栈</li>
+<li>动态链接</li>
+<li>方法出口</li>
+</ul>
+</li>
+<li><strong>局部变量表的内存模型</strong><ul>
+<li>8中的基本数据类型（int,float,double,char,boolean,long,byte,short）</li>
+<li>对象引用类型（reference类型）指向一个对象起始地址的引用指针或者一个对象的句柄或者和这个对象相关的位置</li>
+<li>返回地址（指向了一个字节码指令的地址）</li>
+</ul>
+</li>
+<li><strong>句柄是什么</strong><ul>
+<li>句柄是操作系统在生成对象时的唯一标识符，通过句柄可以获得操作系统提供的服务。句柄不同于指针，获取一个对象的指针就获得了对象的控制权。会对操作系统的安全产生问题。</li>
+</ul>
+</li>
+<li><strong>局部变量表中的数据类型的存储</strong><ul>
+<li>数据类型在局部变量表中的存储空间采用局部变量槽（slot）表示，其实64位和long和double类型会占用两个变量槽，其余的数据类型只会占用一个</li>
+<li>局部变量表所需的内存空间在编译期间就已经分配完成了</li>
+<li>当一个方法进入虚拟机栈的时候，Java虚拟机就会同步创建一个栈帧，这个方法需要在栈帧分配的局部变量空间的大小是完全确定的，并且在方法运行期间不会改变局部变量表的大小</li>
+</ul>
+</li>
+<li><strong>本地方法栈和虚拟机栈的区别？</strong><ul>
+<li>作用是相似的，区别是虚拟机栈执行Java方法，本地方法栈执行本地方法</li>
+</ul>
+</li>
+<li><strong>Java堆的作用</strong><ul>
+<li>Java堆的唯一作用就是用来存放对象实例，几乎所有的对象实例都在这里分配内存</li>
+</ul>
+</li>
+<li><strong>Java堆的基本特征</strong><ul>
+<li>Java堆是虚拟机所管理的内存中最大的一块</li>
+<li>Java堆被所有线程共享，在虚拟机启动时就被创建</li>
+<li>Java堆是垃圾收集机制管理的内存区域（GC）</li>
+<li>Java堆既可以处于物理不连续的内存空间中，但是在逻辑上是被看做连续的。对于大对象如数据，多数的虚拟机要求连续的内存空间</li>
+<li>Java堆既可以固定也可以被扩展，如果Java堆中没有内存完成实例分配并且堆无法扩展时就会抛出OutOfMemoryError</li>
+</ul>
+</li>
+<li><strong>Java大对象是什么</strong><ul>
+<li>需要占用大量连续的内存空间的java对象是大对象 如 很长的字符串和数组。</li>
+</ul>
+</li>
+<li><strong>方法区是做什么的？有什么特性</strong><ul>
+<li>方法区和Java堆有点相似，是各个线程共享的内存区域，用于存储已经被虚拟机加载的类型信息，常量，静态变量。就是作为编辑器编译后的代码缓存</li>
+</ul>
+</li>
+<li><strong>直接内存是什么？有什么用？</strong><ul>
+<li>直接内存不是虚拟机运行时数据区的一部分</li>
+<li>NIO类使用Native函数库直接分配堆外内存，然后通过一个存储在Java堆里面的DirectByteBuffer对象来引用这一块内存</li>
+<li>直接内存的作用在于可以在避免Java堆和Native堆来回复制数据</li>
+<li>堆外内存的大小受到物理机的内存限制，在动态扩展时也会报错</li>
+</ul>
+</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Java虚拟机， 学习思考记录</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/12/Java%E8%99%9A%E6%8B%9F%E6%9C%BA-%E5%AD%A6%E4%B9%A0%E6%80%9D%E8%80%83%E8%AE%B0%E5%BD%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-深入理解java虚拟机-自动内存管理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/12/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3java%E8%99%9A%E6%8B%9F%E6%9C%BA-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">深入理解java虚拟机-自动内存管理-Java内存区域和内存溢出</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/12/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3java%E8%99%9A%E6%8B%9F%E6%9C%BA-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" class="archive-article-date">
+  	<time datetime="2020-04-12T01:13:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="运行时数据区域详解"><a href="#运行时数据区域详解" class="headerlink" title="运行时数据区域详解"></a>运行时数据区域详解</h2><h3 id="Java内存区域与内存溢出异常"><a href="#Java内存区域与内存溢出异常" class="headerlink" title="Java内存区域与内存溢出异常"></a>Java内存区域与内存溢出异常</h3><ul>
+<li>c++开发人员由于c++没有自动内存管理机制，所以需要维护对象的生命周期。</li>
+<li>java开发人员由于存在虚拟机自动内存管理机制，不再需要为每一个new操作编写配对的delete/free代码，但是由于内存的控制权交给了java虚拟机一旦发生内存泄露和内存溢出，对于不理解java虚拟机是怎么使用内存的开发人员，排查错误和修正问题会很艰难。</li>
+</ul>
+<h3 id="Java虚拟机运行时的数据区域"><a href="#Java虚拟机运行时的数据区域" class="headerlink" title="Java虚拟机运行时的数据区域"></a>Java虚拟机运行时的数据区域</h3><ul>
+<li>Java虚拟机在执行程序的过程中它所管理的内存分为若干个不同的数据区域</li>
+<li>每一个数据区域它自己的用途，创建和销毁的时间</li>
+<li>有的数据区域随着虚拟机的启动而一直存在，有的数据区域依赖于用户的进程的启动和结束而建立与销毁</li>
+<li>依据《Java虚拟机规范》，java在运行程序时的数据区域分为方法区（Method Area）,堆（Heap）,虚拟机栈（VM stack）,本地方法栈（Native Method Stack），程序计数器（Program Counter Register）</li>
+<li>被所有进程所共享的数据区包括Method Area，Heap</li>
+<li>有线程隔离的数据区包括，VM Stack,Native Method Stack,Program Counter Register</li>
+</ul>
+<p><img src="/2020/04/12/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3java%E8%99%9A%E6%8B%9F%E6%9C%BA-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/image-20200412095002372.png" alt="image-20200412095002372"></p>
+<h3 id="程序计数器（Program-Counter-Register）"><a href="#程序计数器（Program-Counter-Register）" class="headerlink" title="程序计数器（Program Counter Register）"></a>程序计数器（Program Counter Register）</h3><h4 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h4><ul>
+<li>本质是一块较小的内存空间</li>
+<li>可以看做是当前线程所执行的字节码的行号指示器</li>
+<li>字节码解释器工作时通过改变这个计数器的值来选取下一条需要执行的字节码命令，它是程序控制流的指示器</li>
+<li>依赖于这个计数器，可以实现程序的分支，循环，跳转，异常处理，线程恢复等基础的功能。</li>
+</ul>
+<h4 id="为什么程序计数器被称为“线程私有”的内存"><a href="#为什么程序计数器被称为“线程私有”的内存" class="headerlink" title="为什么程序计数器被称为“线程私有”的内存"></a>为什么程序计数器被称为“线程私有”的内存</h4><ul>
+<li>Java虚拟机的多线程是通过线程轮流切换，分配处理器的执行时间的方式来实现的</li>
+<li>任何一个确定的时刻，一个处理器（对于多核的处理器而言是一个内核）都只会执行一条线程中的指令</li>
+<li>为了保证线程在切换后能恢复到原来的正确的执行位置，每一个线程都要有一个独立的程序计数器</li>
+<li>并且要求不同线程之间的程序计数器是互不影响的，独立存储，我们把这一类的内存区域称为“线程私有的”内存</li>
+<li>ps：如果一个线程正在执行一个Java方法，这个计数器记录的是正在执行的虚拟机字节码指令的地址；如果正在执行的是一个本地（Native）方法，这个计数器则应该为空（Undefined）。此内存是唯一在《Java虚拟机规范》中没有规定任何OutOfMemoryError（内存溢出）情况的区域。</li>
+</ul>
+<h3 id="Java虚拟机栈（Java-Virtual-Machine-Stack）"><a href="#Java虚拟机栈（Java-Virtual-Machine-Stack）" class="headerlink" title="Java虚拟机栈（Java Virtual Machine Stack）"></a>Java虚拟机栈（Java Virtual Machine Stack）</h3><ul>
+<li>Java虚拟机栈也是线程私有，它的生命周期和线程相同</li>
+<li>虚拟机栈描述的Java方法执行的线程的内存模型是：每个方法被执行的时候，Java虚拟机都会同步创建一个栈帧（Stack Frame）,栈帧的作用是存储局部变量表，操作数栈，动态链接，方法出口等信息。每一个方法的调用到执行完毕的过程都对应一个栈帧在虚拟机栈中入栈到出栈的过程。</li>
+<li>c，c++的内存布局中把内存区域笼统的分为了堆内存和栈内存</li>
+<li>《Java虚拟机规范》中对内存区域规定了两种异常状况：StackOverflowError和OutOfMemoryError</li>
+<li>StackOverflowError异常：当线程请求的栈深度大于虚拟机所允许的栈深度</li>
+<li>OutOfMemoryError异常：如果Java虚拟机的栈容量可以动态扩容，当栈扩展时无法申请足够的内存就会报错</li>
+</ul>
+<h4 id="局部变量表中存储的信息包括"><a href="#局部变量表中存储的信息包括" class="headerlink" title="局部变量表中存储的信息包括"></a>局部变量表中存储的信息包括</h4><ul>
+<li><p>编译期间可知的Java虚拟机的各种基本的数据类型</p>
+</li>
+<li><p>对象引用（指的是一个对象起始地址的引用指针或一个代表对象的句柄或者其他与这个对象相关的位置）</p>
+</li>
+<li><p>返回地址（returnAddresss 指向了一条字节码指令的地址）</p>
+<p><img src="/2020/04/12/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3java%E8%99%9A%E6%8B%9F%E6%9C%BA-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/858186-20190711163045574-797204840-1586698073790.png" alt="img"></p>
+</li>
+</ul>
+<h4 id="局部变量表中的基础知识"><a href="#局部变量表中的基础知识" class="headerlink" title="局部变量表中的基础知识"></a>局部变量表中的基础知识</h4><ul>
+<li>数据类型在局部变量表中的存储空间采用局部变量槽（Slot）表示</li>
+<li>64位长度的long和double类型会占用两个变量槽，其余的数据类型只占用一个</li>
+<li>局部变量表所需的内存空间在编译期间就已经完成分配</li>
+<li>当一个方法进入虚拟机栈的时候，Java虚拟机同步创建一个栈帧，这个方法需要在栈帧中分配的局部变量空间的大小（即局部变量槽的数量）是完全确定的，并且在方法运行期间不会改变局部变量表的大小</li>
+</ul>
+<h3 id="本地方法栈（Native-Method-Stack）"><a href="#本地方法栈（Native-Method-Stack）" class="headerlink" title="本地方法栈（Native Method Stack）"></a>本地方法栈（Native Method Stack）</h3><ul>
+<li>作用和虚拟机栈相似</li>
+<li>区别是虚拟机执行Java方法（字节码服务），本地方法栈是虚拟机使用本地方法服务</li>
+</ul>
+<h3 id="Java堆（Heap）"><a href="#Java堆（Heap）" class="headerlink" title="Java堆（Heap）"></a>Java堆（Heap）</h3><ul>
+<li>Java堆是虚拟机所管理的内存中最大的一块</li>
+<li>Java堆是被所有线程共享的一块内存区域，在虚拟机启动时创建</li>
+<li>Java堆的唯一作用就是存放对象实例，几乎所有的对象实例都在这里分配内存</li>
+<li>Java堆是垃圾收集器管理的内存区域（GC堆），垃圾收集器区域的划分仅仅是一部分垃圾收集器的设计风格</li>
+<li>Java堆可以处于物理上不连续的内存空间中，但在逻辑上是被看做连续的。对于大对象如数组，多数的虚拟机要求连续的内存空间</li>
+<li>Java堆既可以固定也可以扩展，如果Java堆中没有内存完成实例分配，并且堆无法在扩展时就会抛出OutOfMemoryError</li>
+</ul>
+<h4 id="从分配内存的角度看Java堆"><a href="#从分配内存的角度看Java堆" class="headerlink" title="从分配内存的角度看Java堆"></a>从分配内存的角度看Java堆</h4><ul>
+<li>所有线程共享的Java堆可以划分出多个线程私有的分配缓冲区，以提升对象分配时效率</li>
+<li>但是不论如何划分，都不会改变Java堆中存储内容的共性，存储的只是能对象的实例</li>
+<li>将Java堆划分的目的只是为了更好的内存回收，更快的内存分配。</li>
+</ul>
+<h3 id="方法区（Method-Area）"><a href="#方法区（Method-Area）" class="headerlink" title="方法区（Method Area）"></a>方法区（Method Area）</h3><ul>
+<li>和Java堆相似，是各个线程共享的内存区域，用于存储已经被虚拟机加载的类型信息，常量，静态变量，即是编辑器编译后的代码缓存</li>
+<li>《Java虚拟机规范》中把java堆和方法区划分为不同的区域</li>
+</ul>
+<h4 id="运行时常量池（Runtime-Constant-Pool）"><a href="#运行时常量池（Runtime-Constant-Pool）" class="headerlink" title="运行时常量池（Runtime Constant Pool）"></a>运行时常量池（Runtime Constant Pool）</h4><ul>
+<li>运行时常量池是方法区的一部分</li>
+<li>Class文件中除了有类的版本，字段，方法，接口等描述信息，还有一项信息是常量池表</li>
+<li>运行时常量池用于存放编译期间生成的字面量和符号引用</li>
+</ul>
+<h4 id="字面量与符号引用解析"><a href="#字面量与符号引用解析" class="headerlink" title="字面量与符号引用解析"></a>字面量与符号引用解析</h4><ul>
+<li><pre><code class="java"><span class="keyword">int</span> i = <span class="number">10</span>;<span class="comment">//这个10就是字面量</span>
+String name = <span class="string">'abc'</span>;<span class="comment">//这个abc就是字面量</span>
+&lt;!--￼<span class="number">0</span>--&gt;
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HeapOOMTest</span> </span>{
+
+    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">OOM</span></span>{
+
+    }
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+        List&lt;OOM&gt; oomList = <span class="keyword">new</span> ArrayList&lt;OOM&gt;();
+        <span class="keyword">while</span>(<span class="keyword">true</span>){
+            oomList.add(<span class="keyword">new</span> OOM());
+        }
+    }
+
+}</code></pre>
+</li>
+<li><p>JVM虚拟机配置如下：（括号内为注释）</p>
+<ul>
+<li>-Xms20M（设置初始堆得大小）</li>
+<li>-Xmx20M（设置对动态扩展的上限值，如果-Xms = -Xmx 则禁止动态扩展）</li>
+<li>-XX:+HeapDumpOnOutOfMemoryError（产生OOM异常的时候输出dump文件）</li>
+</ul>
+</li>
+<li><p>报错提示信息</p>
+</li>
+</ul>
+<p><img src="/2020/04/12/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3java%E8%99%9A%E6%8B%9F%E6%9C%BA-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/image-20200414143912952.png" alt="image-20200414143912952"></p>
+<h4 id="虚拟机栈和本地方法栈溢出"><a href="#虚拟机栈和本地方法栈溢出" class="headerlink" title="虚拟机栈和本地方法栈溢出"></a>虚拟机栈和本地方法栈溢出</h4><ul>
+<li>HotSpot虚拟机不区分虚拟机栈和本地方法栈，栈容量的设置只能通过-Xss参数来设定</li>
+<li>实现原理：虚拟机栈和本地方法栈出现异常的两种原因：一是线程请求的栈深度大于虚拟机所允许的栈深度时就会抛出StackOverflowError异常，二是虚拟机栈内存允许动态扩展，当栈扩展时无法申请到足够的内存的话就会抛出StackOverflowError。</li>
+<li>HotSpot是不支持动态扩展，除非线程创建时就无法获得足够的内存而导致StackOverflowError，在线程运行时不会因为扩展而导致栈内存溢出，只会因为栈内存容量无法容纳新的栈帧进来才会导致StackOverflowError</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">深入理解java虚拟机</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">自动内存管理</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java内存区域和内存溢出</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/12/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3java%E8%99%9A%E6%8B%9F%E6%9C%BA-%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-博客图片显示问题和yilia头像更改" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -177,28 +1106,10 @@
 <li><img src="/2020/04/10/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98%E5%92%8Cyilia%E5%A4%B4%E5%83%8F%E6%9B%B4%E6%94%B9/1.png" alt="1"></li>
 </ol>
 </li>
-<li>在根目录执行 npm install <a href="https://github.com/7ym0n/hexo-asset-image" target="_blank" rel="noopener">https://github.com/7ym0n/hexo-asset-image</a> –save</li>
-<li>执行完第一步的之后，当你执行完 hexo n “博客图片显示问题和yilia头像更改” 会在 /source/_posts生成对应的md文件和同名文件夹(用于存放图片资源)</li>
-<li>使用typora编辑器编辑md文件，点击左上角的文件–&gt;偏好设置–&gt;图像（复制进来的图片会自动放在同名文件夹内）<ol>
-<li><img src="/2020/04/10/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98%E5%92%8Cyilia%E5%A4%B4%E5%83%8F%E6%9B%B4%E6%94%B9/7.png" alt="7"></li>
-</ol>
-</li>
-<li>qq截图然后直接复制进md文件，就会在同名文件夹内直接生成你的图片并且会在md文件中使用相对路径</li>
-<li>运行 hexo g 更新配置 </li>
-<li>运行 hexo s 查看效果（博客可以显示图片的话，hexo d 到 github 上也可以显示正常）</li>
-</ol>
-<h3 id="二-yilia设置头像"><a href="#二-yilia设置头像" class="headerlink" title="二. yilia设置头像"></a>二. yilia设置头像</h3><ol>
-<li>修改 themes/yilia目录下的 _config.yml文件    </li>
-<li><img src="/2020/04/10/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98%E5%92%8Cyilia%E5%A4%B4%E5%83%8F%E6%9B%B4%E6%94%B9/5.png" alt="5"></li>
-<li>上图中的favicon表示你的资源存放的路径，avatar表示你的头像存放的路径，比如我的头像的路径是  /themes/yilia/source/my/tx.jpg （hexo寻找头像的图片路径就是favicon+avatat）</li>
-<li>我是在 /themes/yilia/source 文件夹内新建一个名为 my 的文件夹然后把名为 tx.jpg 的图片放在里面</li>
-<li>然后设置好以后返回博文文件夹的根目录执行 hexo d 部署到 github 上</li>
-<li>最终效果如下<ol>
-<li><img src="/2020/04/10/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98%E5%92%8Cyilia%E5%A4%B4%E5%83%8F%E6%9B%B4%E6%94%B9/6.png" alt="6"></li>
-</ol>
-</li>
-</ol>
-
+<li>在根目录执行 npm install <a href="https://github.com/7ym0n/hexo-asset-image" target="_blank" rel="noopener">https://github.com/7ym0n/hexo-asset-image</a> –save</li></ol>
+        
+          <a class="article-more-a" href="/2020/04/10/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98%E5%92%8Cyilia%E5%A4%B4%E5%83%8F%E6%9B%B4%E6%94%B9/#more">more >></a>
+        
       
 
       
@@ -280,9 +1191,9 @@
 <li>当使用数组的结构来存储队列的数据时，队列是一种操作受限的顺序表</li>
 <li>队列的特点是先进先出</li>
 </ol>
-<h3 id="使用数组创建队列"><a href="#使用数组创建队列" class="headerlink" title="使用数组创建队列"></a>使用数组创建队列</h3><p>1.队头front</p>
-<p>- </p>
-
+        
+          <a class="article-more-a" href="/2020/04/09/%E9%98%9F%E5%88%97%E7%9A%84%E7%BB%93%E6%9E%84%E5%92%8C%E5%8E%9F%E7%90%86/#more">more >></a>
+        
       
 
       
@@ -360,28 +1271,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="稀疏数组的基本介绍"><a href="#稀疏数组的基本介绍" class="headerlink" title="稀疏数组的基本介绍"></a>稀疏数组的基本介绍</h2><ol>
-<li><p>稀疏数组也是二维数组，其作用在于保存无意义数据较多的二维数组</p>
-</li>
-<li><p>稀疏数组第一行保存源数组的行数，列数，有多少个数据。第二行开始保存有意义的数据所在的行，列，数值。（如下如把一个11 * 11的二维数组压缩成一个3 * 3的二维数组）</p>
-<p><img src="/2020/04/09/%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84%E7%9A%84%E7%BB%93%E6%9E%84%E5%92%8C%E5%8E%9F%E7%90%86/C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200409141210081.png" alt="image-20200409141210081"></p>
-</li>
-</ol>
-<h3 id="二维数据转稀疏数组的思路"><a href="#二维数据转稀疏数组的思路" class="headerlink" title="二维数据转稀疏数组的思路"></a>二维数据转稀疏数组的思路</h3><ol>
-<li>遍历原始数组，得到有效数据的个数</li>
-<li>根据有效数组创建稀疏数组spareArr[sum+1] [3]</li>
-<li>将原始数组的有效数值存入稀疏数组</li>
-</ol>
-<h3 id="稀疏数据转二维数组的思路"><a href="#稀疏数据转二维数组的思路" class="headerlink" title="稀疏数据转二维数组的思路"></a>稀疏数据转二维数组的思路</h3><ol>
-<li>先读取稀疏数组的第一行，根据第一行的信息创建原始的二维数组，如sourceArr = int [11] [11]</li>
-<li>在读取稀疏数组的后几行的数据赋值给原始的二维数组。</li>
-</ol>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">package DataStructrue;</span><br><span class="line"></span><br><span class="line">&#x2F;*稀疏数组</span><br><span class="line">* 作用：保存无意义数据较多的二维数组</span><br><span class="line">* 本质：也是二维数组。</span><br><span class="line">*&#x2F;</span><br><span class="line">public class SparseArray &#123;</span><br><span class="line">    &#x2F;&#x2F;打印二维数组</span><br><span class="line">    public static void  printArr(int[][] arr)&#123;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">            for (int j &#x3D; 0; j &lt;arr[i].length;j++) &#123;</span><br><span class="line">                System.out.print(arr[i][j]+&quot; &quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;原始数组转化为稀疏数组</span><br><span class="line">    public static int[][] SourceArrToSparseArr(int[][] sourceArray)&#123;</span><br><span class="line">        &#x2F;&#x2F;遍历原始数组，sum为有效数据的个数</span><br><span class="line">        int sum &#x3D; 0;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; sourceArray.length ; i++) &#123;</span><br><span class="line">            for (int j &#x3D; 0; j &lt;sourceArray[i].length ; j++) &#123;</span><br><span class="line">                if (sourceArray[i][j]!&#x3D;0)&#123;</span><br><span class="line">                    sum++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(sum);</span><br><span class="line">        &#x2F;&#x2F;创建稀疏数组</span><br><span class="line">        int[][] sparseArr &#x3D; new int[sum+1][3];</span><br><span class="line">        &#x2F;&#x2F;设置稀疏数组的第一行数据</span><br><span class="line">        sparseArr[0][0]&#x3D;sourceArray.length;</span><br><span class="line">        sparseArr[0][1]&#x3D;sourceArray[0].length;</span><br><span class="line">        sparseArr[0][2]&#x3D;sum;</span><br><span class="line">        &#x2F;&#x2F;count用于记录是第几个的有效数据</span><br><span class="line">        int count&#x3D;1;</span><br><span class="line">        &#x2F;&#x2F;遍历原数组，将有效数据的行，列，值存入稀疏数组</span><br><span class="line">        for (int i &#x3D; 0; i &lt; sourceArray.length ; i++) &#123;</span><br><span class="line">            for (int j &#x3D; 0; j &lt;sourceArray[i].length ; j++) &#123;</span><br><span class="line">                if (sourceArray[i][j]!&#x3D;0)&#123;</span><br><span class="line">                    sparseArr[count][0]&#x3D;i;</span><br><span class="line">                    sparseArr[count][1]&#x3D;j;</span><br><span class="line">                    sparseArr[count][2]&#x3D;sourceArray[i][j];</span><br><span class="line">                    count++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return sparseArr;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;稀疏数组转化为二维数组</span><br><span class="line">    public static int[][] SparseArrToSourceArr (int[][] sparseArray)&#123;</span><br><span class="line">        int[][] sourceArray &#x3D; new int[sparseArray[0][0]][sparseArray[0][1]];</span><br><span class="line">        for (int i &#x3D; 1; i &lt;&#x3D;sparseArray[0][2]; i++) &#123;</span><br><span class="line">            sourceArray[sparseArray[i][0]][sparseArray[i][1]] &#x3D; sparseArray[i][2];</span><br><span class="line">        &#125;</span><br><span class="line">        return sourceArray;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        &#x2F;&#x2F;创建源数组</span><br><span class="line">        int[][] sourceArray&#x3D; new int[7][11];</span><br><span class="line">        int[][] sparseArray1&#x3D; new int[5][3];</span><br><span class="line">        sourceArray[1][9]&#x3D;2;</span><br><span class="line">        sourceArray[2][5]&#x3D;2;</span><br><span class="line">        sourceArray[3][3]&#x3D;1;</span><br><span class="line">        sourceArray[3][5]&#x3D;1;</span><br><span class="line">        &#x2F;&#x2F;打印原数组</span><br><span class="line">        printArr(sourceArray);</span><br><span class="line">        &#x2F;&#x2F;打印由原数组转化的稀疏数组</span><br><span class="line">        sparseArray1&#x3D;SourceArrToSparseArr(sourceArray);</span><br><span class="line">        System.out.println(&quot;打印稀疏数组&quot;);</span><br><span class="line">        printArr(sparseArray1);</span><br><span class="line">        &#x2F;&#x2F;打印由稀疏数组转化的原数组</span><br><span class="line">        sourceArray&#x3D; SparseArrToSourceArr(sparseArray1);</span><br><span class="line">        System.out.println(&quot;打印原数组&quot;);</span><br><span class="line">        printArr(sourceArray);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
+<li>稀疏数组也是二维数组，其作用在于保存无意义数据较多的二维数组</li>
+<li>稀疏数组第一行保存源数组的行数，列数，有多少个数据。第二行开始保存有意义的数据所在的行，列，数值。（如下如把一个11 * 11的二维数组压缩成一个3 * 3的二维数组）<ol>
+<li><img src="/2020/04/09/%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84%E7%9A%84%E7%BB%93%E6%9E%84%E5%92%8C%E5%8E%9F%E7%90%86/image-20200409141210081.png" alt="image-20200409141210081"></li></ol></li></ol>
+        
+          <a class="article-more-a" href="/2020/04/09/%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84%E7%9A%84%E7%BB%93%E6%9E%84%E5%92%8C%E5%8E%9F%E7%90%86/#more">more >></a>
+        
       
 
       
@@ -438,266 +1333,10 @@
 
 
   
-    <article id="post-线性结构和非线性结构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/09/%E7%BA%BF%E6%80%A7%E7%BB%93%E6%9E%84%E5%92%8C%E9%9D%9E%E7%BA%BF%E6%80%A7%E7%BB%93%E6%9E%84/">线性结构和非线性结构</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/09/%E7%BA%BF%E6%80%A7%E7%BB%93%E6%9E%84%E5%92%8C%E9%9D%9E%E7%BA%BF%E6%80%A7%E7%BB%93%E6%9E%84/" class="archive-article-date">
-  	<time datetime="2020-04-09T05:36:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>线性结构和非线性结构的基本概要</p>
-<ol>
-<li>线性结构是最常用的数据结构，特点：数据元素之间存在一对一的线性关系。</li>
-<li>线性结构按照存储结构的不同分为：顺序存储结构和链式存储结构。顺序存储的线性表被成为顺序表，顺序表中的存储元素是连续的。（元素的地址是连续的）</li>
-<li>链式存储的线性表被称为链表，链表中的存储元素不一定是连续的。因为链表中的元素节点存放数据元素以及相邻元素的地址信息。</li>
-<li>线性结构包括：数组，队列，链表和栈。</li>
-<li>非线性结构包括：二维数组，多维数组，广义表，树结构，图结构。</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/09/%E7%BA%BF%E6%80%A7%E7%BB%93%E6%9E%84%E5%92%8C%E9%9D%9E%E7%BA%BF%E6%80%A7%E7%BB%93%E6%9E%84/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-TCP详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/09/TCP%E8%AF%A6%E8%A7%A3/">TCP详解</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/09/TCP%E8%AF%A6%E8%A7%A3/" class="archive-article-date">
-  	<time datetime="2020-04-08T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="我的TCP详解"><a href="#我的TCP详解" class="headerlink" title="我的TCP详解"></a>我的TCP详解</h1><h3 id="基本特性："><a href="#基本特性：" class="headerlink" title="基本特性："></a>基本特性：</h3><p>​    三次握手四次挥手</p>
-<h3 id="三次握手的目的："><a href="#三次握手的目的：" class="headerlink" title="三次握手的目的："></a>三次握手的目的：</h3><ol>
-<li><p>第一次：客户端 –&gt; 服务器（为了让服务器知道客户端要连接了）</p>
-</li>
-<li><p>第二次：客户端 &lt;– 服务器 （让客户端知道服务器接受到了请求）</p>
-</li>
-<li><p>第三次：客户端 –&gt;服务器（服务器知道客户端收到了自己的回应）</p>
-</li>
-</ol>
-<h3 id="三次握手流程详解"><a href="#三次握手流程详解" class="headerlink" title="三次握手流程详解"></a>三次握手流程详解</h3><ol>
-<li>刚开始的时候，服务器和客户端都处于CLOSE的状态</li>
-<li>服务器进程先创建传输控制块TCB，TCB创建成功意味着服务器进入了LISTEN（监听）状态，时刻准备接受客户端的连接请求</li>
-<li>客户端进程创建传输控制块TCB，向服务器发送请求报文，此时的报文首部位置中的同步标志位SYN = 1，同时选择一个初始序列号seq = x，发送完请求报文且未接受到回复报文这一段的时间内，客户端的进程就进入了SYN-SENT（同步已发送）状态。TCP规定了SYN=1的报文段不能携带数据，但需要先消耗一个序号。</li>
-<li>TCP服务器接收到请求报文后，如果同意连接，就发出确认报文。确认报文中的ACK=1，SYN=1，确认的序号是 x + 1,同时为自己初始化一个序列号seq = y。此时服务器的进程就进入一个SYN-RCVD（同步收到）状态。这个报文也不能携带数据，但是同样要消耗一个序号。</li>
-<li>TCP客户端进程收到确认后还要向服务器发送确认报文。确认报文的ACK=1，确认序号为y+1，自己的序列号是x+1。</li>
-<li>此时TCP连接确认建立。客户端进入ESTABLISHED (已建立连接)状态，当服务器收到客户端的确认后也进入ESTABLISHED状态，此后双方就可以开始通信了。</li>
-</ol>
-<h3 id="面试问题"><a href="#面试问题" class="headerlink" title="面试问题"></a>面试问题</h3><ol>
-<li><p>为什么不使用两次</p>
-<p>​    为了防止已经失效的连接请求突然有传送到了服务器，从而产生错误。</p>
-</li>
-<li></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">TCP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机网络</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/09/TCP%E8%AF%A6%E8%A7%A3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/08/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/08/hello-world/" class="archive-article-date">
-  	<time datetime="2020-04-08T01:16:21.506Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/08/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+    </nav>
   
 
 
@@ -791,11 +1430,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">java面试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">TCP</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">剑指offer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Java虚拟机， 学习思考记录</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -807,11 +1466,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color2">深入理解java虚拟机</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">稀疏数组</a>
+                <a href="javascript:void(0)" class="js-tag color2">自动内存管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Java内存区域和内存溢出</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -819,7 +1486,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">稀疏数组</a>
               </li>
             
             <div class="clearfix"></div>
